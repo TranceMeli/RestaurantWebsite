@@ -17,6 +17,11 @@ regionalen Lieferanten.
 
 ---
 
+## Screenshot
+
+<img width="1911" height="1067" alt="image" src="https://github.com/user-attachments/assets/6de6233b-ea86-4c7e-8898-0ac31d1deb3a" />
+
+
 ## Features
 
 - **Startseite** mit Hero-Bereich, Abschnitt "Über das Restaurant" (inklusive
