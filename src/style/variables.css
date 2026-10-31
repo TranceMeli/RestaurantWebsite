@@ -1,0 +1,36 @@
+:root {
+  /* Waldgrün — Primärfarbe (Vertrauen, "frische Küche") */
+  --color-forest: hsl(152, 62%, 25%);
+  --color-forest-dark: hsl(152, 65%, 18%);
+  --color-forest-light: hsl(152, 42%, 42%);
+
+  /* Honiggold — Akzentfarbe (Wärme, Gemütlichkeit) */
+  --color-honey: hsl(35, 92%, 58%);
+  --color-honey-dark: hsl(35, 80%, 47%);
+  --color-honey-light: hsl(37, 100%, 91%);
+
+  /* Leinen & Creme — Flächen */
+  --color-cream: hsl(40, 33%, 96%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-linen: hsl(39, 38%, 92%);
+
+  /* Text & Linien */
+  --color-ink: hsl(152, 18%, 18%);
+  --color-ink-soft: hsl(152, 10%, 42%);
+  --color-border: hsl(38, 20%, 84%);
+
+  /* Typografie */
+  --font-heading: Lora, "Times New Roman", serif;
+  --font-body: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+
+  /* Layout */
+  --container-width: 1180px;
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+
+  --shadow-sm: 0 8px 24px hsl(152 20% 15% / 0.07);
+  --shadow-md: 0 18px 45px hsl(152 20% 15% / 0.12);
+
+  --transition: 180ms ease;
+}
