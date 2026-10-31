@@ -1,13 +1,6 @@
 <!doctype html>
 <html lang="de">
   <head>
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-  rel="stylesheet"
-/>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -15,9 +8,263 @@
       content="Hasenfutter – Restaurant mit gemütlicher Atmosphäre und frischer Küche."
     />
     <title>Hasenfutter | Freude am Mümmeln</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <header class="site-header">
+      <nav class="navbar container" aria-label="Hauptnavigation">
+        <a class="brand" href="#willkommen" aria-label="Hasenfutter Startseite">
+          <span class="brand-name">Hasenfutter</span>
+          <span class="brand-tagline">Freude am Mümmeln</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="#willkommen">Willkommen</a></li>
+          <li><a href="#restaurant">Über das Restaurant</a></li>
+          <li><a class="nav-button" href="#buchen">Buchen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="willkommen" class="hero section">
+        <div class="hero-content container">
+          <div class="hero-text">
+            <p class="eyebrow">Willkommen bei Hasenfutter</p>
+            <h1>Gutes Essen.<br /><span>Gute Gesellschaft.</span></h1>
+            <p class="hero-description">
+              Ein gemütlicher Ort für besondere Abende, entspanntes Essen und
+              kleine Genussmomente.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#buchen">Tisch buchen</a>
+              <a class="button button-secondary" href="#restaurant"
+                >Restaurant entdecken</a
+              >
+            </div>
+          </div>
+
+          <div class="hero-image image-placeholder">
+            <span>Restaurant-Foto</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="restaurant" class="section section-light">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Unser Restaurant</p>
+            <h2>Mit Liebe gemacht</h2>
+            <p>
+              Platzhaltertext für die Geschichte, Philosophie und besondere
+              Atmosphäre des Restaurants.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-image image-placeholder">
+              <span>Innenraum-Foto</span>
+            </div>
+
+            <div class="about-content">
+              <h3>Ein Ort zum Wohlfühlen</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                posuere, arcu in feugiat tincidunt, erat justo tincidunt lorem,
+                vitae commodo lorem neque sit amet nisi.
+              </p>
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium.
+              </p>
+
+              <div class="feature-list">
+                <div class="feature-card">
+                  <span class="feature-icon">01</span>
+                  <div>
+                    <h4>Frische Küche</h4>
+                    <p>Platzhalter für dein Küchenkonzept.</p>
+                  </div>
+                </div>
+
+                <div class="feature-card">
+                  <span class="feature-icon">02</span>
+                  <div>
+                    <h4>Gemütliches Ambiente</h4>
+                    <p>Platzhalter für die Atmosphäre.</p>
+                  </div>
+                </div>
+
+                <div class="feature-card">
+                  <span class="feature-icon">03</span>
+                  <div>
+                    <h4>Besondere Momente</h4>
+                    <p>Platzhalter für dein Restaurant-Erlebnis.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="buchen" class="section booking-section">
+        <div class="container booking-wrapper">
+          <div class="section-heading section-heading-light">
+            <p class="eyebrow">Reservierung</p>
+            <h2>Deinen Tisch buchen</h2>
+            <p>
+              Die Buchungsfunktion ist zunächst nur als Frontend umgesetzt.
+              Später kann hier eine Backend-Anbindung ergänzt werden.
+            </p>
+          </div>
+
+          <form class="booking-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Max Mustermann"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="max@beispiel.de"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="date">Datum</label>
+                <input type="date" id="date" name="date" />
+              </div>
+
+              <div class="form-group">
+                <label for="time">Uhrzeit</label>
+                <select id="time" name="time">
+                  <option value="">Bitte wählen</option>
+                  <option>17:30</option>
+                  <option>18:00</option>
+                  <option>18:30</option>
+                  <option>19:00</option>
+                  <option>19:30</option>
+                  <option>20:00</option>
+                  <option>20:30</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="guests">Personen</label>
+                <select id="guests" name="guests">
+                  <option value="">Bitte wählen</option>
+                  <option>1 Person</option>
+                  <option>2 Personen</option>
+                  <option>3 Personen</option>
+                  <option>4 Personen</option>
+                  <option>5 Personen</option>
+                  <option>6+ Personen</option>
+                </select>
+              </div>
+
+              <div class="form-group form-group-full">
+                <label for="message">Besondere Wünsche</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Zum Beispiel Allergien, besondere Wünsche oder Hinweise ..."
+                ></textarea>
+              </div>
+            </div>
+
+            <button class="button button-accent" type="submit">
+              Reservierung anfragen
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="kontakt" class="section section-light">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="section-heading">
+              <p class="eyebrow">Kontakt</p>
+              <h2>Wir freuen uns auf dich.</h2>
+              <p>
+                Platzhalter für Kontaktinformationen, Öffnungszeiten und weitere
+                Hinweise.
+              </p>
+            </div>
+
+            <div class="contact-cards">
+              <article class="contact-card">
+                <span class="contact-label">Adresse</span>
+                <p>Musterstraße 123<br />12345 Musterstadt</p>
+              </article>
+
+              <article class="contact-card">
+                <span class="contact-label">Telefon</span>
+                <p><a href="tel:+491234567890">+49 123 4567890</a></p>
+              </article>
+
+              <article class="contact-card">
+                <span class="contact-label">E-Mail</span>
+                <p>
+                  <a href="mailto:hallo@hasenfutter.de">hallo@hasenfutter.de</a>
+                </p>
+              </article>
+
+              <article class="contact-card">
+                <span class="contact-label">Öffnungszeiten</span>
+                <p>Mo–Sa · 17:00–23:00 Uhr<br />So · Ruhetag</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="map-placeholder image-placeholder">
+            <span>Platzhalter für Karte / Standort</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div>
+          <span class="brand-name">Hasenfutter</span>
+          <p>Freude am Mümmeln.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#willkommen">Startseite</a>
+          <a href="#restaurant">Restaurant</a>
+          <a href="#buchen">Buchen</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
   </body>
 </html>
