@@ -1,8 +1,57 @@
 <script setup>
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import logo from "../assets/logo.svg";
 
 const isOpen = ref(false);
+
+// Der Header ist fixiert und schrumpft beim Scrollen. Ein Platzhalter in
+// voller Höhe hält den Platz frei, damit der Inhalt dabei nicht springt.
+const headerEl = ref(null);
+const isScrolled = ref(false);
+const fullHeight = ref(0);
+
+// Gemessen wird nur im aufgeklappten Zustand und nicht mittendrin in der
+// Animation. Die Pause entspricht der Dauer der Logo-Transition.
+let animating = false;
+let animationTimer;
+let observer;
+
+function measure() {
+  if (!isScrolled.value && !animating && headerEl.value) {
+    fullHeight.value = headerEl.value.offsetHeight;
+  }
+}
+
+function onScroll() {
+  // Zwei Schwellen, damit der Zustand an der Grenze nicht flackert.
+  const shouldShrink = isScrolled.value ? window.scrollY >= 10 : window.scrollY > 40;
+  if (shouldShrink === isScrolled.value) {
+    return;
+  }
+  isScrolled.value = shouldShrink;
+  animating = true;
+  clearTimeout(animationTimer);
+  animationTimer = setTimeout(() => {
+    animating = false;
+    measure();
+  }, 300);
+}
+
+onMounted(() => {
+  measure();
+  onScroll();
+  observer = new ResizeObserver(measure);
+  observer.observe(headerEl.value);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", measure);
+});
+
+onBeforeUnmount(() => {
+  observer?.disconnect();
+  clearTimeout(animationTimer);
+  window.removeEventListener("scroll", onScroll);
+  window.removeEventListener("resize", measure);
+});
 
 function toggleMenu() {
   isOpen.value = !isOpen.value;
@@ -14,7 +63,8 @@ function closeMenu() {
 </script>
 
 <template>
-  <header class="site-header">
+  <div class="header-slot" :style="{ height: fullHeight ? fullHeight + 'px' : undefined }">
+  <header ref="headerEl" class="site-header" :class="{ 'is-scrolled': isScrolled }">
     <nav class="navbar container" aria-label="Hauptnavigation">
       <router-link class="brand" to="/" aria-label="Hasenfutter Startseite" @click="closeMenu">
         <img :src="logo" alt="Hasenfutter" class="brand-logo" />
@@ -42,12 +92,15 @@ function closeMenu() {
       </ul>
     </nav>
   </header>
+  </div>
 </template>
 
 <style scoped>
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   background: hsl(0 0% 100% / 0.94);
   border-bottom: 1px solid var(--color-border);
@@ -73,6 +126,11 @@ function closeMenu() {
 .brand-logo {
   height: 200px;
   width: auto;
+  transition: height 0.25s ease;
+}
+
+.site-header.is-scrolled .brand-logo {
+  height: 72px;
 }
 
 .nav-links {
@@ -133,12 +191,14 @@ function closeMenu() {
     min-height: 76px;
   }
 
-  .brand-logo {
+  .brand-logo,
+  .site-header.is-scrolled .brand-logo {
     height: 38px;
   }
 
   .nav-toggle {
     display: block;
+    margin-left: auto;
   }
 
   .nav-links {

@@ -17,10 +17,10 @@ const cards = [
   { label: "Adresse", lines: ["Musterstraße 123", "12345 Musterstadt"] },
   { label: "Telefon", link: { href: "tel:+491234567890", text: "+49 123 4567890" } },
   { label: "E-Mail", link: { href: "mailto:hallo@hasenfutter.de", text: "hallo@hasenfutter.de" } },
-  { label: "Öffnungszeiten", lines: ["Mo–Sa · 17:00–23:00 Uhr", "Montag · Ruhetag"] },
+  { label: "Öffnungszeiten", lines: ["Mo bis Sa · 17:00 bis 23:00 Uhr", "Montag · Ruhetag"] },
 ];
 
-// Platzhalter-Koordinaten (Karlsruhe) — bei echter Adresse austauschen.
+// Platzhalter-Koordinaten (Karlsruhe), bei echter Adresse austauschen.
 const restaurantLocation = { lat: 49.0069, lng: 8.4037 };
 
 const mapEl = ref(null);

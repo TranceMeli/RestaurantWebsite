@@ -8,17 +8,17 @@ const features = [
   {
     image: kuecheImage,
     title: "Frische Küche",
-    text: "Rustikal, vegan und ohne Schnickschnack — bei uns kommt auf den Tisch, was schmeckt, nicht was glänzt.",
+    text: "Rustikal, vegan und ohne Schnickschnack, bei uns kommt auf den Tisch, was schmeckt, nicht was glänzt.",
   },
   {
     image: ambienteImage,
     title: "Gemütliches Ambiente",
-    text: "Warmes Licht, dunkles Holz und der Duft frischer Kräuter — bei uns wird jeder Abend automatisch gemütlich.",
+    text: "Warmes Licht, dunkles Holz und der Duft frischer Kräuter, bei uns wird jeder Abend automatisch gemütlich.",
   },
   {
     image: momenteImage,
     title: "Besondere Momente",
-    text: "Ob du einfach nur den Tag ausklingen lässt oder deinen Geburtstag feierst — bei uns ist für beides Platz.",
+    text: "Ob du einfach nur den Tag ausklingen lässt oder deinen Geburtstag feierst, bei uns ist für beides Platz.",
   },
 ];
 </script>
@@ -30,8 +30,9 @@ const features = [
         <p class="eyebrow">Unser Restaurant</p>
         <h2>Mit Liebe gemacht</h2>
         <p>
-          Platzhaltertext für die Geschichte, Philosophie und besondere
-          Atmosphäre des Restaurants.
+          Hinter Hasenfutter steckt die Liebe zu ehrlichem Essen: Rezepte, die
+          nach Zuhause schmecken, Zutaten aus der Nachbarschaft und ein Tisch,
+          an dem sich jeder willkommen fühlt.
         </p>
       </div>
 
@@ -44,7 +45,7 @@ const features = [
           <h3>Ein Ort zum Wohlfühlen</h3>
           <p>
             Bei uns gibt's das, worauf man nach einem langen Tag wirklich
-            Lust hat: ehrliche Hausmannskost, wie man sie von früher kennt —
+            Lust hat: ehrliche Hausmannskost, wie man sie von früher kennt,
             nur komplett pflanzlich. Schnitzel, Sauerbraten, Käsespätzle,
             Currywurst: Wir nehmen die Klassiker, die man liebt, und zeigen,
             dass darauf niemand verzichten muss, um vegan zu essen.
@@ -52,7 +53,7 @@ const features = [
           <p>
             Was auf den Teller kommt, richtet sich nach der Saison und kommt
             möglichst aus der Region. Wir arbeiten mit Lieferanten aus der
-            Umgebung zusammen und kochen mit dem, was gerade wächst — frisch,
+            Umgebung zusammen und kochen mit dem, was gerade wächst: frisch,
             unaufgeregt und mit Liebe zum Detail.
           </p>
         </div>

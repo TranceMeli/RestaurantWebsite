@@ -17,10 +17,18 @@ regionalen Lieferanten.
 
 ---
 
-## Screenshot
+## Screenshots
 
-<img width="1911" height="1067" alt="image" src="https://github.com/user-attachments/assets/6de6233b-ea86-4c7e-8898-0ac31d1deb3a" />
-
+| | |
+|---|---|
+| ![Startseite](docs/screenshots/startseite.png) | ![Über das Restaurant](docs/screenshots/ueber-das-restaurant.png) |
+| **Startseite** mit großem Header | **Über das Restaurant**, Header geschrumpft, Möhren im Seitenrand |
+| ![Reservierung](docs/screenshots/reservierung.png) | ![Kontakt](docs/screenshots/kontakt.png) |
+| **Reservierungsformular** | **Kontakt** mit Karte |
+| ![Speisekarte](docs/screenshots/speisekarte.png) | ![Standorte](docs/screenshots/standorte.png) |
+| **Speisekarte** mit Kategorie-Filter | **Standorte** mit interaktiver Karte |
+| ![Footer](docs/screenshots/footer.png) | ![Mobil](docs/screenshots/mobil.png) |
+| **Footer** mit Impressum und Datenschutz | **Mobile Ansicht** mit Hamburger-Menü |
 
 ## Features
 
@@ -35,10 +43,18 @@ regionalen Lieferanten.
   eingebetteter Karte
 - **Reservierungsformular** mit Client-seitiger Validierung (Pflichtfelder,
   E-Mail-Format, kein Datum in der Vergangenheit) und Anbindung an ein
-  Django-Backend
+  Django-Backend. Das Backend prüft Datum, Uhrzeit und Personenzahl noch
+  einmal und zeigt Fehler direkt am jeweiligen Feld an.
+- **Impressum und Datenschutzerklärung** als eigene Seiten, verlinkt im Footer.
+  Die Texte sind Platzhalter, die Seite ist ein fiktives Portfolio-Projekt.
+- **Datenschutzfreundlich umgesetzt**: Schriftart lokal eingebunden (keine
+  Verbindung zu Google Fonts), keine Cookies, kein Tracking.
 - **Eigenes Logo** mit integriertem Schriftzug, zusätzlich als Favicon
-- **Dekorative Elemente** im Möhren-Stil: zwei Möhren als Trenner unter dem
-  Header sowie ein durchgehender Randstreifen links und rechts
+- **Dekorative Elemente** im Möhren-Stil: zwei Möhren, die beim Scrollen im
+  Seitenrand direkt unter dem Header mitlaufen (ohne den Text zu überdecken),
+  sowie ein durchgehender Randstreifen links und rechts
+- **Schrumpfender Header**: Das große Logo wird beim Scrollen kleiner, damit
+  mehr Platz für den Inhalt bleibt
 - **Eigenes Farbsystem** auf HSL-Basis, zentral in CSS-Custom-Properties
   gepflegt
 - **Fluide Schriftgröße**, die mit der Bildschirmbreite mitwächst
@@ -54,41 +70,43 @@ regionalen Lieferanten.
 - Vite als Build-Tool
 - Vue Router für Speisekarte und Standorte als eigene Routen
 - Leaflet für die interaktiven Karten
-- Google Fonts: Lora für Überschriften
+- Lora für Überschriften, lokal eingebunden über `@fontsource/lora`
 
 **Backend**
 - Django und Django REST Framework für die Reservierungs-API
 - SQLite als Datenbank
 - django-cors-headers für die Verbindung zum Vite-Dev-Server
+- python-decouple für Konfiguration über `.env`
 
 ## Projektstruktur
 
 ```
+docs/
+  screenshots/                    Bilder für dieses README
+
 hasenfutter-vue/
   index.html
+  .env.example                    VITE_API_URL
   public/
+    favicon.ico
     logo.svg                      Logo als Favicon
   src/
-    main.js                       Einstiegspunkt, registriert den Router
+    main.js                       Einstiegspunkt, Router und Schriften
     App.vue                       Header, Trenner, router-view, Footer, Randstreifen
     router/
-      index.js                    Routen: / , /speisekarte , /standorte
+      index.js                    Routen: / , /speisekarte , /standorte ,
+                                  /impressum , /datenschutz
     style/
       variables.css               Farbpalette und Design-Tokens (HSL)
       base.css                    Reset, fluide Schriftgröße, Typografie, Buttons
     assets/
       logo.svg                    Logo mit Schriftzug
       carrot-divider.svg          Möhre für den Header-Trenner
-      images/
-        hero-restaurant.jpg       Foto im Hero-Bereich
-        restaurant-interior.jpg   Foto bei "Über das Restaurant"
-        feature-kueche.jpg        Bildkarte "Frische Küche"
-        feature-ambiente.jpg      Bildkarte "Gemütliches Ambiente"
-        feature-momente.jpg       Bildkarte "Besondere Momente"
+      images/                     Fotos für Hero, Restaurant und Bildkarten
     components/
-      TheHeader.vue               Logo, Navigation, mobiles Menü
-      HeaderDivider.vue           Trenner mit zwei Möhren unter dem Header
-      TheFooter.vue
+      TheHeader.vue               Logo (schrumpft beim Scrollen), Navigation, mobiles Menü
+      HeaderDivider.vue           Zwei Möhren, die im Seitenrand mitlaufen
+      TheFooter.vue               Links, Copyright, Impressum und Datenschutz
       HeroSection.vue             Willkommen
       AboutSection.vue            Über das Restaurant
       BookingSection.vue          Buchen, Formular mit Validierung
@@ -97,17 +115,22 @@ hasenfutter-vue/
       HomeView.vue                Bündelt Hero, About, Booking und Contact
       MenuView.vue                Speisekarte mit Kategorie-Filter
       LocationsView.vue           Standorte-Karte und Filialliste
+      LegalView.vue               Impressum und Datenschutzerklärung
 
 hasenfutter-backend/              Separates Django-Projekt
+  .env.example                    SECRET_KEY, DEBUG, ALLOWED_HOSTS, CORS_ALLOWED_ORIGINS
+  requirements.txt
   config/
     settings.py
     urls.py
   reservations/
     models.py
-    serializers.py
+    serializers.py                Validierung (Datum, Uhrzeit, Personenzahl)
     views.py
     urls.py
     admin.py
+    migrations/
+    tests.py                      API-Tests
 ```
 
 ## Setup
@@ -129,7 +152,8 @@ cd hasenfutter-backend
 python -m venv venv
 source venv/bin/activate      # Windows: venv\Scripts\activate
 
-pip install django djangorestframework django-cors-headers
+pip install -r requirements.txt
+cp .env.example .env         # SECRET_KEY anpassen
 
 python manage.py migrate
 python manage.py createsuperuser
@@ -139,7 +163,30 @@ python manage.py runserver
 Läuft standardmäßig unter `http://localhost:8000`. Das Admin-Interface ist
 unter `http://localhost:8000/admin/` erreichbar.
 
+Tests: `python manage.py test`. Die API-URL im Frontend lässt sich über
+`VITE_API_URL` setzen (siehe `hasenfutter-vue/.env.example`).
+
 Für die Reservierungsfunktion müssen Frontend und Backend gleichzeitig laufen.
+
+### API
+
+`POST /api/reservierungen/` legt eine Reservierung an.
+
+```json
+{
+  "name": "Max Mustermann",
+  "email": "max@beispiel.de",
+  "date": "2026-12-24",
+  "time": "19:00",
+  "guests": "2 Personen",
+  "message": ""
+}
+```
+
+Antwort `201` mit dem gespeicherten Datensatz, bei ungültigen Angaben `400` mit
+Fehlermeldungen pro Feld. Erlaubte Uhrzeiten sind 17:30 bis 20:30 im
+30-Minuten-Takt, Daten in der Vergangenheit werden abgelehnt. Anfragen pro
+Anonym-Nutzer sind auf 30 pro Stunde begrenzt.
 
 ## Farbpalette
 
@@ -162,6 +209,6 @@ Alle Farben liegen als HSL-Custom-Properties in `src/style/variables.css`:
 
 ## Typografie
 
-- Überschriften: Lora (Google Fonts), Fallback Georgia
+- Überschriften: Lora (lokal eingebunden), Fallback Georgia
 - Fließtext: Gill Sans, Fallback Calibri und Trebuchet MS
 - Die Root-Schriftgröße skaliert fluide zwischen 16px und 19px

@@ -25,8 +25,18 @@ const submitted = ref(false);
 const isSubmitting = ref(false);
 const errorMessage = ref("");
 
-// Heutiges Datum als YYYY-MM-DD, fürs <input min="..."> und die Validierung.
-const today = new Date().toISOString().split("T")[0];
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+
+// Heutiges Datum in lokaler Zeit als YYYY-MM-DD (toISOString wäre UTC und
+// abends schon der nächste Tag), fürs <input min="..."> und die Validierung.
+function localToday() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
+const today = ref(localToday());
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -43,7 +53,7 @@ function validate() {
 
   if (!form.date) {
     errors.date = "Bitte wähle ein Datum.";
-  } else if (form.date < today) {
+  } else if (form.date < localToday()) {
     errors.date = "Das Datum darf nicht in der Vergangenheit liegen.";
   } else {
     errors.date = "";
@@ -65,18 +75,32 @@ async function handleSubmit() {
   isSubmitting.value = true;
 
   try {
-    const response = await fetch("http://localhost:8000/api/reservierungen/", {
+    const response = await fetch(`${API_URL}/api/reservierungen/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
+
+    if (response.status === 400) {
+      const data = await response.json();
+      let hasFieldError = false;
+      for (const key of Object.keys(errors)) {
+        if (data[key]) {
+          errors[key] = [].concat(data[key]).join(" ");
+          hasFieldError = true;
+        }
+      }
+      if (hasFieldError) {
+        return;
+      }
+    }
 
     if (!response.ok) {
       throw new Error("Die Reservierung konnte nicht gespeichert werden.");
     }
 
     submitted.value = true;
-  } catch (error) {
+  } catch {
     errorMessage.value = "Da ist etwas schiefgelaufen. Bitte versuch es noch einmal.";
   } finally {
     isSubmitting.value = false;

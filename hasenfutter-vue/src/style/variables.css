@@ -1,15 +1,15 @@
 :root {
-  /* Waldgrün — Primärfarbe (Vertrauen, "frische Küche") */
+  /* Waldgrün: Primärfarbe (Vertrauen, "frische Küche") */
   --color-forest: hsl(152, 62%, 25%);
   --color-forest-dark: hsl(152, 65%, 18%);
   --color-forest-light: hsl(152, 42%, 42%);
 
-  /* Honiggold — Akzentfarbe (Wärme, Gemütlichkeit) */
+  /* Honiggold: Akzentfarbe (Wärme, Gemütlichkeit) */
   --color-honey: hsl(35, 92%, 58%);
   --color-honey-dark: hsl(35, 80%, 47%);
   --color-honey-light: hsl(37, 100%, 91%);
 
-  /* Leinen & Creme — Flächen */
+  /* Leinen & Creme: Flächen */
   --color-cream: hsl(40, 33%, 96%);
   --color-white: hsl(0, 0%, 100%);
   --color-linen: hsl(39, 38%, 92%);

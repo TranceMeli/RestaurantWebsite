@@ -14,4 +14,4 @@ class Reservation(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.name} – {self.date} {self.time} ({self.guests})"
+        return f"{self.name}, {self.date} {self.time} ({self.guests})"
